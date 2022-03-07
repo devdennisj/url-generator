@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/teris-io/shortid"
 )
@@ -40,11 +41,17 @@ func postURL(c *gin.Context) {
 	newURL.Id = sid
 	// Add the new album to the slice.
 	urls = append(urls, newURL)
-	c.IndentedJSON(http.StatusCreated, newURL)
+	c.IndentedJSON(http.StatusCreated, "http://localhost:8080/"+newURL.Id)
 }
 
 func main() {
 	router := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+
+	router.Use(cors.New(config))
+
 	router.GET("/:id", HandleShortUrlRedirect)
 	router.POST("/", postURL)
 
