@@ -1,0 +1,16 @@
+.wrapper-generated-link {
+  width: 415px;
+  position: relative;
+  padding: 5px 0 15px 0;
+}
+
+.wrapper-generated-link:hover {
+  cursor: pointer;
+}
+
+h2 {
+  width: 415px;
+  text-align: left;
+  margin: 0;
+  font-size: 1em;
+}

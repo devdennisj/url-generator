@@ -39,7 +39,6 @@ func postURL(c *gin.Context) {
 	}
 
 	newURL.Id = sid
-	// Add the new album to the slice.
 	urls = append(urls, newURL)
 	c.IndentedJSON(http.StatusCreated, "http://localhost:8080/"+newURL.Id)
 }
