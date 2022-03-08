@@ -11,13 +11,21 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [generatedLink, setGeneratedLink] = useState<string | null>();
+  const [longURL, setLongURL] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+
     setIsSubmitting(true);
 
+    if (longURL && longURL.length < 5) {
+      setErrorMessage('Invalid URL');
+      return;
+    }
+
     try {
-      const { data, status } = await postURL({ LongURL: '' });
+      const { data, status } = await postURL({ LongURL: longURL });
 
       if (status !== 201) {
         setErrorMessage('Invalid URL');
@@ -35,9 +43,14 @@ function App() {
   return (
     <div className='App column'>
       {generatedLink && <GeneratedLink link={generatedLink} />}
-      <form className='column'>
+      <form id='URLForm' className='column'>
         <label>Enter URL:</label>
-        <TextField type='url' name='LongURL' id={'LongURL'} />
+        <TextField
+          type='url'
+          name='LongURL'
+          id={'LongURL'}
+          onChange={setLongURL}
+        />
         {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <div className='wrapper-button'>
           <Button onClick={handleSubmit} disabled={isSubmitting}>

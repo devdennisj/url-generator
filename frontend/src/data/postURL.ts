@@ -7,7 +7,5 @@ export interface PostURL {
 export async function postURL(payload: PostURL) {
   const URL = 'http://localhost:8080';
 
-  return await axios.post(URL, {
-    LongURL: 'https://www.wikipedia.org/',
-  });
+  return await axios.post(URL, payload);
 }

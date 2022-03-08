@@ -8,21 +8,18 @@ export function Tooltip({
   children: React.ReactNode;
   isVisible: boolean;
 }) {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(() => isVisible);
+  const [isTooltipVisible, setIsTooltipVisible] = useState(isVisible);
 
   useEffect(() => {
     setTimeout(() => setIsTooltipVisible(false), 2000);
   }, []);
 
   return (
-    <>
-      {isTooltipVisible ? (
-        <div className='tooltip'>
-          <span>{children}</span>
-        </div>
-      ) : (
-        <></>
-      )}
-    </>
+    <div
+      className='tooltip'
+      style={{ display: isTooltipVisible ? 'block' : 'none' }}
+    >
+      <span>{children}</span>
+    </div>
   );
 }

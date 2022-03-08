@@ -5,9 +5,10 @@ interface ITextfield {
   type: React.HTMLInputTypeAttribute;
   id: string;
   name: string;
+  onChange: React.Dispatch<string>;
 }
 
-export function TextField({ type, id, name }: ITextfield) {
+export function TextField({ type, id, name, onChange }: ITextfield) {
   return (
     <input
       type={type}
@@ -16,6 +17,7 @@ export function TextField({ type, id, name }: ITextfield) {
       id={id}
       name={name}
       minLength={5}
+      onChange={({ target }) => onChange(target.value)}
       autoFocus
     />
   );
