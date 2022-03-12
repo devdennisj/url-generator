@@ -11,7 +11,11 @@ export function Tooltip({
   const [isTooltipVisible, setIsTooltipVisible] = useState(isVisible);
 
   useEffect(() => {
-    setTimeout(() => setIsTooltipVisible(false), 2000);
+    const visibilityTimer = setTimeout(() => setIsTooltipVisible(false), 2000);
+
+    return () => {
+      clearTimeout(visibilityTimer);
+    };
   }, []);
 
   return (
